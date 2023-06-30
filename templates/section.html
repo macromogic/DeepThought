@@ -23,6 +23,16 @@
         {% endif %}
 
         {% for page in pages %}
+        {% if page.extra.friend %}
+        <article class="friendcard">
+          <h2 class="title">
+            <a class="has-text-dark" href='{{ page.extra.link }}''>
+              {{ page.title }}
+            </a>
+          </h2>
+          <p class="subtitle">{{ page.description }}</p>
+        </article>
+        {% else %}
         <article class="box">
           <h2 class="title">
             <a class="has-text-dark" href='{{ page.permalink }}'>
@@ -60,6 +70,7 @@
             </div>
           </div>
         </article>
+        {% endif %}
         {% endfor %}
       </div>
     </div>
