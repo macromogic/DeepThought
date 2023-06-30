@@ -191,6 +191,14 @@
   </a>
   {% endif %}
 
+  {% if social_config.bilibili %}
+  <a class="has-text-bilibili" href="https://space.bilibili.com/{{ social_config.bilibili }}" target="_blank">
+    <span class="icon is-large" title="Bilibili">
+      <i class="fa-brands fa-bilibili"></i>
+    </span>
+  </a>
+  {% endif %}
+
   {% if config.generate_feed %}
   <a class="has-text-rss" href="{{ config.base_url }}/{{ config.feed_filename }}" target="_blank">
     <span class="icon is-large" title="RSS Feed">
