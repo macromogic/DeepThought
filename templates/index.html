@@ -15,6 +15,17 @@
     </div>
     <div class="content">
       {{ section.content | safe }}
+      <h3>Recent Publications</h3>
+      {% set section = get_section(path="pubs/_index.md") %}
+      {% for page in section.pages | slice(end=3) %}
+        <p>
+          <div><b>{{ page.title }}</b></div>
+          <div>{{ macros::fmt_page_authors(page=page) }}</div>
+          <div>{{ page.extra.book | default(value='') }}</div>
+          <div><time datetime="{{ page.date }}">{{ page.date | date(format='%B, %Y') }}</time></div>
+          <div>{{ macros::fmt_paper_misc(page=page) }}</div>
+        </p>
+      {% endfor %}
     </div>
   </div>
 </section>

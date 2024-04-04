@@ -235,6 +235,36 @@
 </span>
 {% endmacro %}
 
+{% macro fmt_page_authors(page) %}
+  {% for author in page.authors -%}
+    {% if loop.index > 1 %}, {% endif %}
+    {%- if config.extra.author.name in author -%}
+      <u>{{author}}</u>
+    {%- else -%}
+      {{author}}
+    {%- endif -%}
+  {%- endfor -%}
+{% endmacro %}
+
+{% macro fmt_paper_misc(page) %}
+  {{ page.extra.comment | default(value='') }}
+  {% if page.extra.url %}
+  <a class="has-text-danger-dark has-text-weight-medium" href='{{ page.extra.url }}'>
+    [URL]
+  </a>
+  {% endif %}
+  {% if page.extra.website %}
+  <a class="has-text-danger-dark has-text-weight-medium" href='{{ page.extra.website }}'>
+    [Website]
+  </a>
+  {% endif %}
+  {% if page.extra.code %}
+  <a class="has-text-danger-dark has-text-weight-medium" href='{{ page.extra.code }}'>
+    [Code]
+  </a>
+  {% endif %}
+{% endmacro %}
+
 {% macro render_categories(categories) %}
 <p>
   Categories:

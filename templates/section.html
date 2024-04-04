@@ -23,14 +23,39 @@
         {% endif %}
 
         {% for page in pages %}
-        {% if page.extra.friend %}
+        {% if section.path == "/friends/" %}
         <article class="friendcard">
           <h2 class="title">
-            <a class="has-text-dark" href='{{ page.extra.link }}''>
+            <a class="has-text-dark" href='{{ page.extra.link }}'>
               {{ page.title }}
             </a>
           </h2>
-          <p class="subtitle">{{ page.description }}</p>
+          <p class="subtitle"></p>
+          <p>{{ page.description }}</p>
+        </article>
+        {% elif section.path == "/pubs/" %}
+        <article class="pubcard">
+          <h2 class="title">
+            <div class="has-text-dark">
+              {{ page.title }}
+            </div>
+          </h2>
+          <p class="subtitle"></p>
+          <div class="has-text-grey is-gapless">
+            <i class="fas fa-user"></i>
+            {{ macros::fmt_page_authors(page=page) }}
+          </div>
+          <div class="has-text-grey is-gapless">
+            <i class="fas fa-book"></i>
+            {{ page.extra.book | default(value='') }}
+          </div>
+          <div class="has-text-grey is-gapless">
+            <i class="fas fa-calendar-alt"></i>
+            <span><time datetime="{{ page.date }}">{{ page.date | date(format='%B, %Y') }}</time></span>
+          </div>
+          <div class="has-text-grey is-gapless">
+            {{ macros::fmt_paper_misc(page=page) }}
+          </div>
         </article>
         {% else %}
         <article class="box">
