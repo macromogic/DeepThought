@@ -16,14 +16,14 @@
     <div class="content">
       {{ section.content | safe }}
       <h3>Recent Publications</h3>
-      {% set section = get_section(path="pubs/_index.md") %}
-      {% for page in section.pages | slice(end=3) %}
+      {% set data = load_data(path="json/pubs.json") | sort(attribute="date") | reverse | slice(end=3) %}
+      {% for pub in data %}
         <p>
-          <div><b>{{ page.title }}</b></div>
-          <div>{{ macros::fmt_page_authors(page=page) }}</div>
-          <div>{{ page.extra.book | default(value='') }}</div>
-          <div><time datetime="{{ page.date }}">{{ page.date | date(format='%B, %Y') }}</time></div>
-          <div>{{ macros::fmt_paper_misc(page=page) }}</div>
+          <div><b>{{ pub.title }}</b></div>
+          <div>{{ macros::fmt_page_authors(pub=pub) }}</div>
+          <div><i>{{ pub.book | default(value='') }}</i></div>
+          <div><time>{{ pub.date | date(format='%B, %Y') }}</time></div>
+          <div>{{ macros::fmt_paper_misc(pub=pub) }}</div>
         </p>
       {% endfor %}
     </div>

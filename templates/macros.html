@@ -235,8 +235,8 @@
 </span>
 {% endmacro %}
 
-{% macro fmt_page_authors(page) %}
-  {% for author in page.authors -%}
+{% macro fmt_page_authors(pub) %}
+  {% for author in pub.authors -%}
     {% if loop.index > 1 %}, {% endif %}
     {%- if config.extra.author.name in author -%}
       <u>{{author}}</u>
@@ -246,20 +246,22 @@
   {%- endfor -%}
 {% endmacro %}
 
-{% macro fmt_paper_misc(page) %}
-  {{ page.extra.comment | default(value='') }}
-  {% if page.extra.url %}
-  <a class="has-text-danger-dark has-text-weight-medium" href='{{ page.extra.url }}'>
+{% macro fmt_paper_misc(pub) %}
+  {% if pub.comment %}
+    {{ pub.comment }} <br>
+  {% endif %}
+  {% if pub.url %}
+  <a class="has-text-danger-dark has-text-weight-medium" href='{{ pub.url }}'>
     [URL]
   </a>
   {% endif %}
-  {% if page.extra.website %}
-  <a class="has-text-danger-dark has-text-weight-medium" href='{{ page.extra.website }}'>
+  {% if pub.website %}
+  <a class="has-text-danger-dark has-text-weight-medium" href='{{ pub.website }}'>
     [Website]
   </a>
   {% endif %}
-  {% if page.extra.code %}
-  <a class="has-text-danger-dark has-text-weight-medium" href='{{ page.extra.code }}'>
+  {% if pub.code %}
+  <a class="has-text-danger-dark has-text-weight-medium" href='{{ pub.code }}'>
     [Code]
   </a>
   {% endif %}
